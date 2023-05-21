@@ -50,10 +50,13 @@
 
             const sloty=document.querySelectorAll('.slot');
             let tabSloty=[];
-            tabSloty=sloty; 
+            tabSloty=[...sloty]; 
+            
 
             function klikniecie(e) {
-                let coto=tabSloty.findIndex(this)
+                console.dir(tabSloty)
+                let coto=tabSloty.findIndex(element=>element==this)
+                console.log(coto)
                 alert(coto);
                 
             }
