@@ -25,20 +25,30 @@ body {
 
 .karta {
     background-size:contain;
-    background-color:black;
+   
     min-width: 100px;
     max-width: 100px;
     
     min-height: 170px;
+    max-height:170px;
     background-repeat:no-repeat;
     background-image: url("./img/karta_odpowiedzi.png");
     margin:5px;
-   
-  
-  
+      
     flex:5;
     visibility:visible;
     opacity:1;
+ 
+    overflow:scroll;
+   
+    
+}
+
+.karta p {
+    font-size: small;
+    margin:3px;
+    color:black;
+    background-color:white;
     
 }
 

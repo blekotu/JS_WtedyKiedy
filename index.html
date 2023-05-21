@@ -11,7 +11,7 @@
 
 	</head>
 	<body>
-        cornify-add;
+        
 		<div class="container">
             <div class="karty">
                 <div class="karta">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="slot"></div>
                 <div class="karta">
-                    <p> Karta 3</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, sapiente qui odio distinctio laboriosam, hic quas quae fugiat totam libero eos autem asperiores sed temporibus! Laudantium earum repellat animi magnam nisi omnis, excepturi quibusdam similique ipsa ab in optio dolore? </p>
                 </div>
                 <div class="slot"></div>
                 <div class="karta">
@@ -47,14 +47,17 @@
             </div>
 
         <script>
+            
 
-            const sloty=document.querySelectorAll('.slot');
-            let tabSloty=[];
-            tabSloty=sloty; 
+
+            const sloty=[...document.querySelectorAll('.slot')];
+            const karty=[...document.querySelectorAll('.karta')];
 
             function klikniecie(e) {
-                let coto=tabSloty.findIndex(this)
+                let coto=sloty.findIndex(element=>element==this);
                 alert(coto);
+                karty[coto].style.visibility="hidden"; //testuje chowanie elementu z kupki karty
+
                 
             }
 
