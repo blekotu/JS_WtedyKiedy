@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<html lang="pl">
+		<title>...</title>
+
+		<link rel="stylesheet" href="style.css">
+        <script src="main.js"></script>
+	
+
+	</head>
+	<body>
+        cornify-add;
+		<div class="container">
+            <div class="karty">
+                <div class="karta">
+                    <p> Karta 1</p>
+                </div>
+                <div class="slot"></div>
+                <div class="karta">
+                    <p> Karta 2</p>
+                </div>
+                <div class="slot"></div>
+                <div class="karta">
+                    <p> Karta 3</p>
+                </div>
+                <div class="slot"></div>
+                <div class="karta">
+                    <p> Karta 4</p>
+                </div>
+                <div class="slot"></div>
+                <div class="karta">
+                    <p> Karta 5</p>
+                </div>
+                <div class="slot"></div>
+                <div class="karta"></div>
+                <div class="slot"></div>
+                <div class="karta"></div>
+                <div class="slot"></div>
+                <div class="karta"></div>
+                <div class="slot"></div>
+                <div class="karta"></div>
+                <div class="slot"></div>
+                <div class="karta"></div> 
+                
+            </div>
+
+        <script>
+
+            const sloty=document.querySelectorAll('.slot');
+            let tabSloty=[];
+            tabSloty=sloty; 
+
+            function klikniecie(e) {
+                let coto=tabSloty.findIndex(this)
+                alert(coto);
+                
+            }
+
+            console.log(sloty);
+            sloty.forEach(karta => karta.addEventListener('click', klikniecie));
+            sloty[2].style.visibility="visible";
+            sloty[3].style.visibility="visible";
+            
+
+        </script>
+
+	</body>
+
+
+</html>
