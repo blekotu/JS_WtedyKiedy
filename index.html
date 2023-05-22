@@ -6,33 +6,26 @@
 		<title>...</title>
 
 		<link rel="stylesheet" href="style.css">
-        <script src="main.js"></script>
-	
-
+        
 	</head>
 	<body>
         
 		<div class="container">
+            <div class="navigator">
+                <div class="score"></div>
+                <div class="current-question"></div>
+                <div class="card-deck"></div>
+            </div>
             <div class="karty">
-                <div class="karta">
-                    <p> Karta 1</p>
-                </div>
+                <div class="karta"></div>
                 <div class="slot"></div>
-                <div class="karta">
-                    <p> Karta 2</p>
-                </div>
+                <div class="karta"></div>
                 <div class="slot"></div>
-                <div class="karta">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, sapiente qui odio distinctio laboriosam, hic quas quae fugiat totam libero eos autem asperiores sed temporibus! Laudantium earum repellat animi magnam nisi omnis, excepturi quibusdam similique ipsa ab in optio dolore? </p>
-                </div>
+                <div class="karta"></div>
                 <div class="slot"></div>
-                <div class="karta">
-                    <p> Karta 4</p>
-                </div>
+                <div class="karta"></div>
                 <div class="slot"></div>
-                <div class="karta">
-                    <p> Karta 5</p>
-                </div>
+                <div class="karta"> </div>
                 <div class="slot"></div>
                 <div class="karta"></div>
                 <div class="slot"></div>
@@ -45,29 +38,10 @@
                 <div class="karta"></div> 
                 
             </div>
+           
+            <script type="text/javascript" src="questions.js"></script>
+            <script type="text/javascript" src="main.js"></script>
 
-        <script>
-            
-
-
-            const sloty=[...document.querySelectorAll('.slot')];
-            const karty=[...document.querySelectorAll('.karta')];
-
-            function klikniecie(e) {
-                let coto=sloty.findIndex(element=>element==this);
-                alert(coto);
-                karty[coto].style.visibility="hidden"; //testuje chowanie elementu z kupki karty
-
-                
-            }
-
-            console.log(sloty);
-            sloty.forEach(karta => karta.addEventListener('click', klikniecie));
-            sloty[2].style.visibility="visible";
-            sloty[3].style.visibility="visible";
-            
-
-        </script>
 
 	</body>
 
