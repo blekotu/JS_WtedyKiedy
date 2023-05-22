@@ -9,30 +9,63 @@
 
 
             
-            function answer_selection(e) {
-                let coto=slots.findIndex(element=>element==this);
-                let data_min =0;
-                let data_max =0;
-                (cards[coto].data)?data_min=cards[coto].data:data_min=-100000;
-                (cards[coto+1].data)?data_max=cards[coto+1].data:data_max=100000;
-                console.log(data_min);
-                console.log(data_max);
+        function answer_selection(e) {
+            let coto=slots.findIndex(element=>element==this);
+            let data_min =0;
+            let data_max =0;
+ 
+            (cards[coto].data)?data_min=cards[coto].data:data_min=-100000;
+            (cards[coto+1].data)?data_max=cards[coto+1].data:data_max=100000;
                 
-                console.log(`w lewo wolnych ${cards.slice(0,coto).length}`)
-                console.log(`w prawo wolnych ${cards.slice(coto+1).length}`)
+            if (pytania[numerPytania][0]>=data_min && pytania[numerPytania][0]<=data_max) {
 
-                //zajete miejsce
-                if (cards[coto].data) {
-
-                } else if (cards[coto+1]) {
-
-                } else {
+               
+                if (!cards[coto].data && cards[coto+1].data>=pytania[numerPytania][0]) {
                     placeCard(coto,numerPytania);
-                    //bo było wolne miesjce po lewej
-                };
+                    //dobra odp i pusto po lewo i nie ostatni slot zajety
+                } else if (!cards[coto+1].data && cards[coto].data<=pytania[numerPytania][0]) {
+                    placeCard(coto+1,numerPytania);
+                    //dobra odpowiedz i pusto po prawo i nie ostatni slot zajety
+                } else {
+                    //sprawdz w ktora strone przesunac karty - gdzie wiecej wolnych slotow
+                    if (cards.slice(0,coto).length>cards.slice(coto+1).length) {
+                        //przesuwaj w lewo bo tam wiecej wolnych slotow 
+                            console.log('w lewo')
+                            for (let i=1;i<coto+1;i++) {
+                                    cards[i-1].innerHTML=cards[i].innerHTML;
+                                    cards[i-1].data=cards[i].data;
+                                if (cards[i-1].data) {
+                                    cards[i-1].style.visibility="visible";
+                                    cards[i-1].style.opacity="1";
+                                }
+                            }
+                            placeCard(coto,numerPytania);
+                         } else {
+                        //skoro nie w lewo to przesun w prawo
+                            console.log('w prawo')
+                            for (let i=8;i>coto;i--) {
+                                    cards[i+1].innerHTML=cards[i].innerHTML;
+                                    cards[i+1].data=cards[i].data;
+                                if (cards[i+1].data) {
+                                    cards[i+1].style.visibility="visible";
+                                    cards[i+1].style.opacity="1";
+                                }
+                            }
+                            placeCard(coto+1,numerPytania);
+                        }
+                    
+                    
+                }
 
-            
+
+            } else {
+                alert('zla dopowiedz')
+            }
                 
+
+
+                card_deck.style.visibility="visible";
+                card_deck.addEventListener('click',newQuestion);
             }
 
             function formatQuestion (question) {
@@ -63,9 +96,9 @@
                 }
             }
             
-            function newQuestion(question) {
-                //const numberOfQuestions=pytania.length;
-                //const question=Math.floor(Math.random(1)*1007);
+            function newQuestion() {
+                const numberOfQuestions=pytania.length;
+                const question=Math.floor(Math.random(1)*numberOfQuestions);
                 
                 currentQuestion.innerHTML=`<p class="current-question-text"
                             >${pytania[question][1]}</p>`;
