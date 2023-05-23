@@ -60,10 +60,12 @@
 
             } else {
                 alert('zla dopowiedz')
+
+                slots.forEach(slot=>slot.style.visibility="hidden")
             }
                 
 
-
+                currentQuestion.innerHTML="";
                 card_deck.style.visibility="visible";
                 card_deck.addEventListener('click',newQuestion);
             }
@@ -91,9 +93,11 @@
                 for (let i=0;i<10;i++) {
                     if (cards[i].style.visibility=="visible" || cards[i].style.opacity=="1") {
                         (i>0)?slots[i-1].style.visibility="visible":1;
-                        (i<9)?slots[i].style.visibility="visible":1;
+                        (i<10)?slots[i].style.visibility="visible":1;
                     }
                 }
+                
+               
             }
             
             function newQuestion() {
@@ -114,7 +118,8 @@
 
 
             placeCard(4,Math.floor(Math.random(1)*pytania.length));
-            placeCard(5,Math.floor(Math.random(1)*pytania.length));
+          
+
 
             //Watching clicks for open slots between cards
             slots.forEach(karta => karta.addEventListener('click', answer_selection));
@@ -124,18 +129,5 @@
             
             card_deck.addEventListener('click',newQuestion(numerPytania));
 
-            
 
-
-            
-
-            
-          
-            // sloty[2].style.visibility="visible";
-            // sloty[3].style.visibility="visible";
-           
-            
-            // karty[4].innerHTML=formatData(pytania[1][0]);
-            
-            // karty[4].innerHTML+=formatQuestion(pytania[1][1])
        

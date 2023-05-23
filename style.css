@@ -55,7 +55,7 @@ body {
 
 .karty {
     background-color: rgb(37, 31, 31);
-    width: count(100px*14.5);
+    width: count(100px*15);
     min-height: 100px;
     margin-left: auto;
     margin-right: auto;
