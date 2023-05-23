@@ -2,10 +2,23 @@
 
             const slots=[...document.querySelectorAll('.slot')];
             const cards=[...document.querySelectorAll('.karta')];
+            const scores=document.querySelector('.score');
             const currentQuestion=document.querySelector('.current-question');
             let answer=0;
             let numerPytania=0;
             const card_deck=document.querySelector('.card-deck');
+            let correctAnswers=1;
+            let allQuestions=1;
+
+        function printScores () {
+                results=`<p> Correctly Answered : ${correctAnswers}</p>`;
+                results+=`<p> All questions : ${allQuestions}</p>`;
+               
+               results+=`<p> Your efficiency : ${(correctAnswers/allQuestions).toFixed(2)*100}%</p>`
+                scores.innerHTML=results;
+            }
+
+
 
         function shiftCardsLeft(start) {
             
@@ -30,16 +43,12 @@
         }
         }
 
-
-            
-        function answer_selection(e) {
+           function answer_selection(e) {
             let coto=slots.findIndex(element=>element==this);
             let data_min =0;
             let data_max =0;
-
-            //proba latwej korekty przy dodaniu slotu z przodu
             coto=coto-1;
-            //koniec proby
+            //bo logike zrobilem na mniejsz ilos slotow
             
             //Okreslanie granicznych dat po obu stronach zaznaczonego slotu
             if (coto>-1) {
@@ -48,7 +57,6 @@
                 //skrajny po lewej
                 data_min=-100000;
             }
-            
             if (coto<10) {
             (cards[coto+1].data)?data_max=cards[coto+1].data:data_max=100000;
             } else {
@@ -56,12 +64,11 @@
                 data_max=100000;
             }
             
-
-
-            
             if (pytania[numerPytania][0]>=data_min && pytania[numerPytania][0]<=data_max) {
-  
-               
+                //Poprawna odpowiedz
+                correctAnswers+=1;
+                printScores();
+
                 if (cards[coto] && !cards[coto].data && cards[coto+1].data>=pytania[numerPytania][0]) {
                     placeCard(coto,numerPytania);
                     //dobra odp i pusto po lewo i nie ostatni slot zajety
@@ -121,10 +128,6 @@
                         (i>=0)?slots[i].style.visibility="visible":1;
                         (i<=9)?slots[i+1].style.visibility="visible":1;
 
-                        // Dzialajace bez slotu z przodu
-                        // (i>0)?slots[i-1].style.visibility="visible":1;
-                        // (i<10)?slots[i].style.visibility="visible":1;
-
                     }
                 }
                 
@@ -141,7 +144,8 @@
                 showSlots();
                 numerPytania=question;
                 card_deck.style.visibility="hidden"
-
+                allQuestions+=1;
+                printScores();
                 //REMOVE AT END
                 answer=pytania[question][0];
             }
