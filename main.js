@@ -7,64 +7,88 @@
             let numerPytania=0;
             const card_deck=document.querySelector('.card-deck');
 
+        function shiftCardsLeft(start) {
+            
+            for (let i=1;i<start+1;i++) {
+                cards[i-1].innerHTML=cards[i].innerHTML;
+                cards[i-1].data=cards[i].data;
+            if (cards[i-1].data) {
+                cards[i-1].style.visibility="visible";
+                cards[i-1].style.opacity="1";
+            }
+        }
+        }
+
+        function shiftCardsRight(start) {
+            for (let i=8;i>start;i--) {
+                cards[i+1].innerHTML=cards[i].innerHTML;
+                cards[i+1].data=cards[i].data;
+            if (cards[i+1].data) {
+                cards[i+1].style.visibility="visible";
+                cards[i+1].style.opacity="1";
+            }
+        }
+        }
+
 
             
         function answer_selection(e) {
             let coto=slots.findIndex(element=>element==this);
             let data_min =0;
             let data_max =0;
- 
-            (cards[coto].data)?data_min=cards[coto].data:data_min=-100000;
-            (cards[coto+1].data)?data_max=cards[coto+1].data:data_max=100000;
-                
-            if (pytania[numerPytania][0]>=data_min && pytania[numerPytania][0]<=data_max) {
 
+            //proba latwej korekty przy dodaniu slotu z przodu
+            coto=coto-1;
+            //koniec proby
+            
+            //Okreslanie granicznych dat po obu stronach zaznaczonego slotu
+            if (coto>-1) {
+            (cards[coto].data)?data_min=cards[coto].data:data_min=-100000;
+            } else {
+                //skrajny po lewej
+                data_min=-100000;
+            }
+            
+            if (coto<10) {
+            (cards[coto+1].data)?data_max=cards[coto+1].data:data_max=100000;
+            } else {
+                //skrajny po prawej
+                data_max=100000;
+            }
+            
+
+
+            
+            if (pytania[numerPytania][0]>=data_min && pytania[numerPytania][0]<=data_max) {
+  
                
-                if (!cards[coto].data && cards[coto+1].data>=pytania[numerPytania][0]) {
+                if (cards[coto] && !cards[coto].data && cards[coto+1].data>=pytania[numerPytania][0]) {
                     placeCard(coto,numerPytania);
                     //dobra odp i pusto po lewo i nie ostatni slot zajety
-                } else if (!cards[coto+1].data && cards[coto].data<=pytania[numerPytania][0]) {
+                } else if (cards[coto+1] && !cards[coto+1].data && cards[coto].data<=pytania[numerPytania][0]) {
                     placeCard(coto+1,numerPytania);
                     //dobra odpowiedz i pusto po prawo i nie ostatni slot zajety
                 } else {
                     //sprawdz w ktora strone przesunac karty - gdzie wiecej wolnych slotow
                     if (cards.slice(0,coto).length>cards.slice(coto+1).length) {
                         //przesuwaj w lewo bo tam wiecej wolnych slotow 
-                            console.log('w lewo')
-                            for (let i=1;i<coto+1;i++) {
-                                    cards[i-1].innerHTML=cards[i].innerHTML;
-                                    cards[i-1].data=cards[i].data;
-                                if (cards[i-1].data) {
-                                    cards[i-1].style.visibility="visible";
-                                    cards[i-1].style.opacity="1";
-                                }
-                            }
+                            shiftCardsLeft(coto)
                             placeCard(coto,numerPytania);
                          } else {
                         //skoro nie w lewo to przesun w prawo
-                            console.log('w prawo')
-                            for (let i=8;i>coto;i--) {
-                                    cards[i+1].innerHTML=cards[i].innerHTML;
-                                    cards[i+1].data=cards[i].data;
-                                if (cards[i+1].data) {
-                                    cards[i+1].style.visibility="visible";
-                                    cards[i+1].style.opacity="1";
-                                }
-                            }
+                            shiftCardsRight(coto);
                             placeCard(coto+1,numerPytania);
                         }
-                    
-                    
-                }
-
+                    }
 
             } else {
-                alert('zla dopowiedz')
-
+                //Wrong Answer!
+                alert( `zla dopowiedz! Wydarzenie mialo miejsce ${pytania[numerPytania][0]}`)
                 slots.forEach(slot=>slot.style.visibility="hidden")
             }
                 
-
+            
+            //W kazdym prypadku wyczyscic pytanie, pokazac talie do losowani i wlaczyc sluchacza;
                 currentQuestion.innerHTML="";
                 card_deck.style.visibility="visible";
                 card_deck.addEventListener('click',newQuestion);
@@ -75,7 +99,9 @@
             };
             
             function formatData(data) {
-                return `<p class="data">${data}</p>`;
+                let wynik="";
+                (data<0)?wynik=`${(Math.abs(data))} BC`:wynik=data;
+                return `<p class="data">${wynik}</p>`;
               }
 
 
@@ -92,8 +118,13 @@
             function showSlots () {   //Do klikania pomiedzy umieszczonymi na planszy kartami
                 for (let i=0;i<10;i++) {
                     if (cards[i].style.visibility=="visible" || cards[i].style.opacity=="1") {
-                        (i>0)?slots[i-1].style.visibility="visible":1;
-                        (i<10)?slots[i].style.visibility="visible":1;
+                        (i>=0)?slots[i].style.visibility="visible":1;
+                        (i<=9)?slots[i+1].style.visibility="visible":1;
+
+                        // Dzialajace bez slotu z przodu
+                        // (i>0)?slots[i-1].style.visibility="visible":1;
+                        // (i<10)?slots[i].style.visibility="visible":1;
+
                     }
                 }
                 
@@ -118,7 +149,7 @@
 
 
             placeCard(4,Math.floor(Math.random(1)*pytania.length));
-          
+            
 
 
             //Watching clicks for open slots between cards
