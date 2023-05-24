@@ -1,4 +1,4 @@
-var pytania = [[1543,"heliocentryczna budowa świata, wydanie 'O obrotach sfer niebieskich' (Mikołaj Kopernik - Polska).","Wynalazki"],
+var pytania_all = [[1543,"heliocentryczna budowa świata, wydanie 'O obrotach sfer niebieskich' (Mikołaj Kopernik - Polska).","Wynalazki"],
 [1509,"odkryto najstarszą tapetę ścienną (Christ College w Cambridge - Anglia).","Wynalazki"],
 [1510,"zegarek sprężynowy - najstarszy zachowany egzemplarz (Peter Henlein - Norymberga)","Wynalazki"],
 [1510,"pisuar (Włochy - czas przybliżony)","Wynalazki"],

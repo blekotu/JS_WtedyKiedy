@@ -29,13 +29,15 @@ body {
 }
 
 .card-deck {
-    background-image: url('./img/talia_pytania.png');
-    background-size: cover;
-    width:120px;
+    background-color:darkgoldenrod;
+    min-width:120px;
       
-    cursor:pointer;   
+     
 }
 
+.clickable {
+    cursor:pointer;
+}
 
 .current-question {
     padding:15px;

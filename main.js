@@ -9,6 +9,29 @@
             const card_deck=document.querySelector('.card-deck');
             let correctAnswers=1;
             let allQuestions=1;
+            let pytania=pytania_all;
+
+            const questionCategories = [...new Set(pytania.map(pytanie=>pytanie[2]))]
+
+        function CategoryChange() {
+            const checkboxy = document.querySelectorAll('.card-deck input ');
+            const choosen=[];
+
+            checkboxy.forEach(boxik=>(boxik.checked)?choosen.push(boxik.name):1)
+            
+            pytania=pytania_all.filter(rekord=>choosen.includes(rekord[2]));
+            
+        }
+    
+        function categories () {
+            
+            response="<form>"
+            questionCategories.forEach(cat=>response+=`<input type="checkbox" id="cat-${cat}" name="${cat}" 
+                    checked onchange="CategoryChange()">
+                    <label id ="cat-${cat}">${cat}</label><br />`);
+            response+="</form>"
+            card_deck.innerHTML=response;
+        }    
 
         function printScores () {
                 results=`<p> Correctly Answered : ${correctAnswers}</p>`;
@@ -43,7 +66,7 @@
         }
         }
 
-           function answer_selection(e) {
+        function answer_selection(e) {
             let coto=slots.findIndex(element=>element==this);
             let data_min =0;
             let data_max =0;
@@ -65,6 +88,7 @@
             }
             
             if (pytania[numerPytania][0]>=data_min && pytania[numerPytania][0]<=data_max) {
+                
                 //Poprawna odpowiedz
                 correctAnswers+=1;
                 printScores();
@@ -87,19 +111,20 @@
                             placeCard(coto+1,numerPytania);
                         }
                     }
-
             } else {
                 //Wrong Answer!
                 alert( `zla dopowiedz! Wydarzenie mialo miejsce ${pytania[numerPytania][0]}`)
                 slots.forEach(slot=>slot.style.visibility="hidden")
             }
-                
-            
             //W kazdym prypadku wyczyscic pytanie, pokazac talie do losowani i wlaczyc sluchacza;
                 currentQuestion.innerHTML="";
-                card_deck.style.visibility="visible";
-                card_deck.addEventListener('click',newQuestion);
+                //card_deck.style.visibility="visible";
+                //card_deck.addEventListener('click',newQuestion);
+
+                currentQuestion.addEventListener('click',newQuestion);
+                currentQuestion.classList.add('clickable');
             }
+
 
             function formatQuestion (question) {
                 return `<p class="pytanie"> ${question}</p>`;
@@ -135,6 +160,7 @@
             }
             
             function newQuestion() {
+
                 const numberOfQuestions=pytania.length;
                 const question=Math.floor(Math.random(1)*numberOfQuestions);
                 
@@ -143,7 +169,11 @@
                 
                 showSlots();
                 numerPytania=question;
-                card_deck.style.visibility="hidden"
+                
+                currentQuestion.removeEventListener('click',newQuestion);
+                currentQuestion.classList.remove('clickable');
+
+                //card_deck.style.visibility="hidden"
                 allQuestions+=1;
                 printScores();
                 //REMOVE AT END
@@ -151,18 +181,25 @@
             }
 
 
-
-            placeCard(4,Math.floor(Math.random(1)*pytania.length));
+            //Kategorie
+            categories();
             
+            //placing first Card
+            placeCard(4,Math.floor(Math.random(1)*pytania.length));
+                                
+            //drawing first question
+            newQuestion();
+        
 
 
             //Watching clicks for open slots between cards
             slots.forEach(karta => karta.addEventListener('click', answer_selection));
-            
-            //drawing new question
-            numerPytania=Math.floor(Math.random(1)*pytania.length);
-            
-            card_deck.addEventListener('click',newQuestion(numerPytania));
+
+
+
+
+
+            //card_deck.addEventListener('click',newQuestion(numerPytania));
 
 
        
