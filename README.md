@@ -1,3 +1,4 @@
 # JS_WtedyKiedy
-learning js html and css simple game (in polish questions in pytania.js)
-sort dates still in progress
+learning js html and css simple game (in polish questions in questions.js)
+sort dates of events in proper order
+still in progress
