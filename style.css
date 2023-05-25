@@ -29,8 +29,20 @@ body {
 }
 
 .card-deck {
+    display:flex;
+    flex-direction: row;
 
 }
+
+.language {
+    background-color: rgb(207, 207, 204, 0.5);
+    max-height: 2em;
+}
+ 
+.langSelected {
+    Background-color: rgb(230, 230, 230);
+}
+
 
 .clickable {
     cursor:pointer;

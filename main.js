@@ -1,5 +1,6 @@
 
 
+
             const slots=[...document.querySelectorAll('.slot')];
             const cards=[...document.querySelectorAll('.karta')];
             const scores=document.querySelector('.score');
@@ -9,19 +10,43 @@
             const card_deck=document.querySelector('.card-deck');
             let correctAnswers=1;
             let allQuestions=1;
-            let pytania=pytania_all_en;
-            let language="ENG"
+            let pytania=pytania_all;
+            let failmessage="";
+            let language="PL";
+            
+            displayLanguages();
+            changeLanguage(language);
 
+
+            //chyba nie potrzebne
             const questionCategories = [...new Set(pytania.map(pytanie=>pytanie[2]))]
 
 
+
+
+
         function changeLanguage(language){
-            alert('zmieniam jezyk' + language);
+            const klawisze=document.querySelectorAll('.language');
+            klawisze.forEach(e=>(e.classList.contains(language))?e.classList.add("langSelected"):e.classList.remove("langSelected"))
+                // {
+                //     e.classList.remove("langSelected")})
             
+            // const klawisz=document.querySelector(`.${language}`)
+            // klawisz.classList.add("langSelected")
+            
+              
+
             if (language=="ENG") {
                 pytania=pytania_all_en;
+                currentQuestion.innerHTML=`<p class="current-question-text"
+                            >${pytania[numerPytania][1]}</p>`;
+                failmessage="Wrong answer! It was on ";
             } else {
+                language="PL"
                 pytania=pytania_all;
+                currentQuestion.innerHTML=`<p class="current-question-text"
+                            >${pytania[numerPytania][1]}</p>`;
+                failmessage="Zła odpowiedź! To miało miejsce w ";
             }
         }
 
@@ -50,11 +75,10 @@
 
         function displayLanguages() {
             let html;
-             html=`<input class="language POLISH" type="button" onclick="changeLanguage('PL')" value="PL">`;
-            html+=`<input class="language ENGLISH" type="button" onclick="changeLanguage('ENG')" value="ENG">`;
+            html=`<input class="language PL"  type="button" onclick="changeLanguage('PL')" value="PL">`;
+            html+=`<input class="language ENG" type="button" onclick="changeLanguage('ENG')" value="ENG">`;
+  
             card_deck.innerHTML=html;
-
-
         };        
 
 
@@ -138,16 +162,16 @@
                     }
             } else {
                 //Wrong Answer!
-                alert( `zla dopowiedz! Wydarzenie mialo miejsce ${pytania[numerPytania][0]}`)
+                alert( `${failmessage} ${pytania[numerPytania][0]}`)
                 slots.forEach(slot=>slot.style.visibility="hidden")
             }
             //W kazdym prypadku wyczyscic pytanie, pokazac talie do losowani i wlaczyc sluchacza;
                 currentQuestion.innerHTML="";
-                //card_deck.style.visibility="visible";
-                //card_deck.addEventListener('click',newQuestion);
-
                 currentQuestion.addEventListener('click',newQuestion);
                 currentQuestion.classList.add('clickable');
+            // i usun pytanie ze stosu, niestety do zmiany jezyka
+                pytania.filter(rekord=>rekord[0]!=numerPytania);
+
             }
 
 
@@ -186,15 +210,17 @@
             }
             
             function newQuestion() {
-
+              
                 const numberOfQuestions=pytania.length; //total number of questions
                 const question=Math.floor(Math.random(1)*numberOfQuestions);
                 
+                
+                numerPytania=question;
                 currentQuestion.innerHTML=`<p class="current-question-text"
-                            >${pytania[question][1]}</p>`;
+                            >${pytania[numerPytania][1]}</p>`;
                 
                 showSlots();
-                numerPytania=question;
+                
                 
                 currentQuestion.removeEventListener('click',newQuestion);
                 currentQuestion.classList.remove('clickable');
@@ -203,13 +229,12 @@
                 allQuestions+=1;
                 printScores();
                 //REMOVE AT END
-                answer=pytania[question][0];
+                answer=pytania[numerPytania][0];
             }
 
 
             //Kategorie
             //categories();
-            displayLanguages();
             
             //placing first Card on board and removing from pile
             numerPytania=Math.floor(Math.random(1)*pytania.length)
