@@ -9,29 +9,54 @@
             const card_deck=document.querySelector('.card-deck');
             let correctAnswers=1;
             let allQuestions=1;
-            let pytania=pytania_all;
+            let pytania=pytania_all_en;
+            let language="ENG"
 
             const questionCategories = [...new Set(pytania.map(pytanie=>pytanie[2]))]
 
-        function CategoryChange() {
-            const checkboxy = document.querySelectorAll('.card-deck input ');
-            const choosen=[];
 
-            checkboxy.forEach(boxik=>(boxik.checked)?choosen.push(boxik.name):1)
+        function changeLanguage(language){
+            alert('zmieniam jezyk' + language);
             
-            pytania=pytania_all.filter(rekord=>choosen.includes(rekord[2]));
-            
+            if (language=="ENG") {
+                pytania=pytania_all_en;
+            } else {
+                pytania=pytania_all;
+            }
         }
-    
-        function categories () {
+
+
+        // function CategoryChange() {
             
-            response="<form>"
-            questionCategories.forEach(cat=>response+=`<input type="checkbox" id="cat-${cat}" name="${cat}" 
-                    checked onchange="CategoryChange()">
-                    <label id ="cat-${cat}">${cat}</label><br />`);
-            response+="</form>"
-            card_deck.innerHTML=response;
-        }    
+        //     if (!currentQuestion.innerHTML) {            
+        //     const checkboxy = document.querySelectorAll('.card-deck input ');
+        //     const choosen=[];
+        //     checkboxy.forEach(boxik=>(boxik.checked)?choosen.push(boxik.name):1)
+        //     changeLanguage(language)  //to refresh whole questions table
+        //     pytania.filter(rekord=>choosen.includes(rekord[2]));
+        //     }
+            
+        // }
+    
+        // function categories () {
+            
+        //     response="<form>"
+        //     questionCategories.forEach(cat=>response+=`<input type="checkbox" id="cat-${cat}" name="${cat}" 
+        //             checked onchange="CategoryChange()">
+        //             <label id ="cat-${cat}">${cat}</label><br />`);
+        //     response+="</form>"
+        //     card_deck.innerHTML=response;
+        // }    
+
+        function displayLanguages() {
+            let html;
+             html=`<input class="language POLISH" type="button" onclick="changeLanguage('PL')" value="PL">`;
+            html+=`<input class="language ENGLISH" type="button" onclick="changeLanguage('ENG')" value="ENG">`;
+            card_deck.innerHTML=html;
+
+
+        };        
+
 
         function printScores () {
                 results=`<p> Correctly Answered : ${correctAnswers}</p>`;
@@ -131,13 +156,14 @@
             };
             
             function formatData(data) {
-                let wynik="";
-                (data<0)?wynik=`${(Math.abs(data))} BC`:wynik=data;
-                return `<p class="data">${wynik}</p>`;
+                let result="";
+                (data<0)?result=`${(Math.abs(data))} BC`:result=data;
+                return `<p class="data">${result}</p>`;
               }
 
 
-            function placeCard(boardNumber,question) { //W doklnym rędzie
+            function placeCard(boardNumber,question) { 
+                //after correct answer reviel opacity and visibility
                 const card=cards[boardNumber];
                 card.style.visibility="visible";
                 card.style.opacity="1";
@@ -147,7 +173,7 @@
                 slots.forEach(slot=>slot.style.visibility="hidden")
             }  
 
-            function showSlots () {   //Do klikania pomiedzy umieszczonymi na planszy kartami
+            function showSlots () {   //Show clickable slots between activ cards
                 for (let i=0;i<10;i++) {
                     if (cards[i].style.visibility=="visible" || cards[i].style.opacity=="1") {
                         (i>=0)?slots[i].style.visibility="visible":1;
@@ -161,7 +187,7 @@
             
             function newQuestion() {
 
-                const numberOfQuestions=pytania.length;
+                const numberOfQuestions=pytania.length; //total number of questions
                 const question=Math.floor(Math.random(1)*numberOfQuestions);
                 
                 currentQuestion.innerHTML=`<p class="current-question-text"
@@ -182,10 +208,13 @@
 
 
             //Kategorie
-            categories();
+            //categories();
+            displayLanguages();
             
-            //placing first Card
-            placeCard(4,Math.floor(Math.random(1)*pytania.length));
+            //placing first Card on board and removing from pile
+            numerPytania=Math.floor(Math.random(1)*pytania.length)
+            placeCard(4,numerPytania);
+            pytania.filter(rekord=>rekord[0]!=numerPytania);
                                 
             //drawing first question
             newQuestion();
