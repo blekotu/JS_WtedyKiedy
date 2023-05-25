@@ -1,6 +1,4 @@
 
-
-
             const slots=[...document.querySelectorAll('.slot')];
             const cards=[...document.querySelectorAll('.karta')];
             const scores=document.querySelector('.score');
@@ -26,15 +24,10 @@
 
 
         function changeLanguage(language){
+            
             const klawisze=document.querySelectorAll('.language');
             klawisze.forEach(e=>(e.classList.contains(language))?e.classList.add("langSelected"):e.classList.remove("langSelected"))
-                // {
-                //     e.classList.remove("langSelected")})
-            
-            // const klawisz=document.querySelector(`.${language}`)
-            // klawisz.classList.add("langSelected")
-            
-              
+             
 
             if (language=="ENG") {
                 pytania=pytania_all_en;
