@@ -1,127 +1,201 @@
 body {
-    background-color: rgb(37, 31, 31);
+  background-color: rgb(37, 31, 31);
+}
+
+.winner {
+  background-image: url("./img/winner.JPG");
+  background-repeat: no-repeat;
+  background-position: center;
+  
+  z-index: 5;
+  background-image: url("./img/winner.JPG");
+  transform: scale(2, 2);
+  
 }
 
 .container {
-    height: 600px;
-    margin:0;
-    justify-items: flex-end;
-    align-items:center;
+  height: 600px;
+  margin: 0;
+  justify-items: flex-end;
+  align-items: center;
 }
-
 .navigator {
-    min-height:200px;
-    background-color: rgb(37, 31, 31);
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding:30px;
+  min-height: 200px;
+  background-color: rgb(37, 31, 31);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 30px;
 }
 
 .score {
-    background-color: chocolate;
-    color: white;
-    text-indent: 1em;
-    min-width: 200px;
-    max-width: 200px;
-    min-height: 170px;
-    max-height:170px;    
+
+  color: white;
+  text-indent: 1em;
+  min-width: 200px;
+  max-width: 200px;
+  min-height: 170px;
+  max-height: 170px;
+  display: flex;
+  flex-direction: row;
 }
 
-.card-deck {
+.score-text {
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
+    max-width: 120px;
+    margin:0;
 
+}
+
+.score-text p {
+    margin-top:35px;
+    margin-left:0;
+    font-size: large;
+}
+
+.score-result {
+    display:flex;
+    flex-direction: column;
+    max-width:80px;
+    min-width: 30px;
+    
+    position: relative;
+    text-align: center;
+    
+    font-size:x-large;
+    font-weight: bold;
+    color:white;   
+}
+
+
+.score-result-correct {
+    position:   absolute;
+    top: 10px;
+    left:20px;
+}
+
+.score-result-all {
+    position:   absolute;
+    top: 90px;
+    left: 20px;
+}
+
+
+
+.card-deck {
+  display: flex;
+  flex-direction: row;
 }
 
 .language {
-    background-color: rgb(207, 207, 204, 0.5);
-    max-height: 2em;
-}
- 
-.langSelected {
-    Background-color: rgb(230, 230, 230);
+  background-color: rgb(207, 207, 204, 0.5);
+  max-height: 2em;
 }
 
+.langSelected {
+  background-color: rgb(230, 230, 230);
+}
 
 .clickable {
-    cursor:pointer;
+    border-radius: 40px;
+    cursor: pointer;  
+    transition: .1;
+    animation: pulse 1s linear infinite;
+    
+}
+
+@-webkit-keyframes pulse {
+0% {
+ -webkit-transform: scale(1.0);
+ transform: scale(1.0);
+}
+50% {
+-webkit-transform: scale(0.95);
+transform: scale(0.95);
+}
+100% {
+ -webkit-transform: scale(1);
+transform: scale(1);
+}
 }
 
 .current-question {
-    padding:15px;
-   
-    background-image: url('./img/aktualne_bez_pytania.png');
-    background-size: cover;
-    width:169px;
-    height:161px;
-}
-.current-question-text {
-    font-size: 1.1em;
-    margin:3px;
-    color:black;
-    background-color:white;
-    
-    text-align: center;
-    text-justify: center;
+  padding: 15px;
+  background-image: url("./img/aktualne_bez_pytania.png");
+  background-size: cover;
+  width: 169px;
+  height: 161px;
 }
 
+
+.current-question-text {
+  font-size: 1.1em;
+  margin: 3px;
+  color: black;
+  background-color: white;
+
+  text-align: center;
+  text-justify: center;
+}
 
 .karty {
-    background-color: rgb(37, 31, 31);
-    width: count(100px*15);
-    min-height: 100px;
-    margin-left: auto;
-    margin-right: auto;
-    justify-items: flex-end;
-    
-    display:flex;
-    flex-direction: row;
-
+  background-color: rgb(37, 31, 31);
+  width: count(100px * 15);
+  min-height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-items: flex-end;
+  overflow:scroll;
+  display: flex;
+  flex-direction: row;
 }
 
-
 .karta {
-    background-size:contain;
-    min-width: 100px;
-    max-width: 100px;
-    min-height: 170px;
-    max-height:170px;
-    background-repeat:no-repeat;
-    background-image: url("./img/karta_odpowiedzi.png");
-    margin:5px;
-    overflow:hidden;
-    flex:5;
-    visibility:visible;
-    opacity:.1;
-    z-index:1;
-        
+  background-size: contain;
+  min-width: 100px;
+  max-width: 100px;
+  min-height: 170px;
+  max-height: 170px;
+  background-repeat: no-repeat;
+  background-image: url("./img/karta_odpowiedzi.png");
+  margin: 5px;
+  overflow: hidden;
+  flex: 5;
+  visibility: visible;
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.placed {
+  visibility: visible;
+  opacity: 1;
 }
 
 .pytanie {
-    font-size: .7em;
-    margin:3px;
-    color:black;
-    background-color:white;
-    text-align:center;
+  font-size: 0.7em;
+  margin: 3px;
+  color: black;
+  background-color: white;
+  text-align: center;
 }
 
 .data {
-    font-size: 1.2em;
-    font-style: bold;
-    margin-top:3px;
-    text-align: center;
-    color:rgb(48, 26, 26);
+  font-size: 1.2em;
+  font-style: bold;
+  margin-top: 3px;
+  text-align: center;
+  color: rgb(48, 26, 26);
 }
 
 .slot {
-    min-width: 10px;
-  
-    border-radius: 10px;
-    background-color: rgb(99, 216, 45);
-    box-shadow: 0 0 40px 10px rgba(48, 255, 7, 0.3);
-    z-index: 0;
-    flex:1;
-    visibility:hidden;
-    cursor:pointer;
+  min-width: 10px;
+
+  border-radius: 10px;
+  background-color: rgb(99, 216, 45);
+  box-shadow: 0 0 40px 10px rgba(48, 255, 7, 0.3);
+  z-index: 0;
+  flex: 1;
+  visibility: hidden;
+  cursor: pointer;
 }
