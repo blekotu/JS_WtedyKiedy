@@ -9,10 +9,32 @@ let correctAnswers = 0;
 let allQuestions = 0;
 let pytania = pytania_all;
 let failmessage = "";
+let scoremessages={}
 let language = "PL";
+const popup_title=document.querySelector(".popup-text-title")
+const popup_body=document.querySelector(".popup-text-body")
+
+let onboarding_title="";
+let onboarding_body="";
+
+
+
 
 displayLanguages();
 changeLanguage(language);
+
+function displayInfo()  {
+    
+  const infoBox=document.querySelector('.popup');
+    
+  if (infoBox.classList.contains("popup-visible")) {
+    infoBox.classList.remove("popup-visible");
+  } else {
+    infoBox.classList.add("popup-visible");
+  };
+ 
+}
+
 
 function changeLanguage(language) {
   const buttons = document.querySelectorAll(".language");
@@ -27,19 +49,36 @@ function changeLanguage(language) {
     currentQuestion.innerHTML = `<p class="current-question-text"
                             >${pytania[questionNumber][1]}</p>`;
     failmessage = "Wrong answer! It was on ";
+    scoremessages = {"answers":"Score :","questions":"Questions :"};
+    onboarding_title=onboarding[1][1];
+    onboarding_body=onboarding[1][2];
+    
   } else {
     language = "PL";
     pytania = pytania_all;
     currentQuestion.innerHTML = `<p class="current-question-text"
                             >${pytania[questionNumber][1]}</p>`;
     failmessage = "Zła odpowiedź! To miało miejsce w ";
+    scoremessages = {"answers":"Punkty :","questions":"Pytania :"};
+    onboarding_title=onboarding[0][1];
+    onboarding_body=onboarding[0][2];
+    
   }
+  printScores();
+  popup_title.innerHTML=`<p> ${onboarding_title} </p><p class="onboarding-close">X</p>`;
+  popup_body.innerHTML=`<p> ${onboarding_body} </p>`;
+  const popup_close=document.querySelector(".onboarding-close");
+  popup_close.addEventListener('click',displayInfo)
 }
+
 
 function displayLanguages() {
   let html;
-  html = `<input class="language PL"  type="button" onclick="changeLanguage('PL')" value="PL">`;
+  html ='<p class="info-icon" onclick="displayInfo()">&#9432</p>'
+  html += `<input class="language PL"  type="button" onclick="changeLanguage('PL')" value="PL">`;
   html += `<input class="language ENG" type="button" onclick="changeLanguage('ENG')" value="ENG">`;
+  
+  //html+='<input class="language info-button" type="button" onclick="displayInfo()" value=&#9432>';
 
   card_deck.innerHTML = html;
 }
@@ -54,10 +93,10 @@ function printScores() {
   ).toFixed(2)}%</p>`;
 
   results=`<div class="score-text">
-    <p>Answers:</p><p>Questions:</p></div>
+    <p>${scoremessages["answers"]}</p><p>${scoremessages["questions"]}</p></div>
     <div class="score-result">
-    <img src='./img/ball_gold.png'>
-    <img src='./img/ball_gold.png'>
+    <img src='./img/ring1.png'>
+    <img src='./img/ring2.png'>
     <p class="score-result-correct">${correctAnswers}</p>
     <p class="score-result-all">${allQuestions}</p></div>
     </div>`;

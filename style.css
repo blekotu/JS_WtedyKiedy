@@ -1,5 +1,6 @@
 body {
   background-color: rgb(37, 31, 31);
+
 }
 
 .winner {
@@ -8,16 +9,62 @@ body {
   background-position: center;
   
   z-index: 5;
-  background-image: url("./img/winner.JPG");
   transform: scale(2, 2);
   
 }
 
+.popup { 
+ 
+    position: absolute;
+    top:0;
+    left:0;
+    display:flex;
+    flex-direction: row;
+    z-index:3;
+    visibility:hidden;
+}
+.popup-visible {
+    visibility:visible;
+}
+.popup-picture {
+ flex:1;
+}
+
+.popup-text {
+  background-color: rgb(66, 63, 63, .9);
+  border-radius: 60px;
+  padding:2em;
+  color: white;
+  flex:2;
+}
+
+.popup-text-title {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  border-bottom: 1px dotted white;
+}
+
+.onboarding-close {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.popup img {
+    height: 100vh;
+}
+
+
 .container {
+  position: absolute;
+  top:0;
+  left:0;
   height: 600px;
   margin: 0;
   justify-items: flex-end;
   align-items: center;
+
+  
 }
 .navigator {
   min-height: 200px;
@@ -43,7 +90,8 @@ body {
 .score-text {
     display:flex;
     flex-direction: column;
-    max-width: 120px;
+    width: 100px;
+
     margin:0;
 
 }
@@ -51,7 +99,8 @@ body {
 .score-text p {
     margin-top:35px;
     margin-left:0;
-    font-size: large;
+    font-size:medium;
+    flex:1;    
 }
 
 .score-result {
@@ -72,13 +121,13 @@ body {
 .score-result-correct {
     position:   absolute;
     top: 10px;
-    left:20px;
+    left:18px;
 }
 
 .score-result-all {
     position:   absolute;
     top: 90px;
-    left: 20px;
+    left: 10px;
 }
 
 
@@ -89,13 +138,29 @@ body {
 }
 
 .language {
+  margin-top:.6em;
   background-color: rgb(207, 207, 204, 0.5);
   max-height: 2em;
+  cursor:pointer;
 }
 
 .langSelected {
   background-color: rgb(230, 230, 230);
+  
 }
+
+.info-icon {
+    color:white;
+    font-size:1.5em;
+    font-weight:bolder;
+    margin-right: .7em;
+    max-height: 2em;
+    cursor:pointer;
+    margin-top:0;
+    flex:1;
+    
+}
+
 
 .clickable {
     border-radius: 40px;
@@ -105,18 +170,18 @@ body {
     
 }
 
-@-webkit-keyframes pulse {
+@keyframes pulse {
 0% {
- -webkit-transform: scale(1.0);
- transform: scale(1.0);
+transform: scale(1.0);
+opacity:1;
 }
 50% {
--webkit-transform: scale(0.95);
 transform: scale(0.95);
+opacity:.8;
 }
 100% {
- -webkit-transform: scale(1);
 transform: scale(1);
+opacity:1;
 }
 }
 
@@ -181,7 +246,7 @@ transform: scale(1);
 }
 
 .data {
-  font-size: 1.2em;
+  font-size: 1.7em;
   font-style: bold;
   margin-top: 3px;
   text-align: center;
@@ -198,4 +263,24 @@ transform: scale(1);
   flex: 1;
   visibility: hidden;
   cursor: pointer;
+  
+  animation: vanishing 2s linear infinite;
+  
 }
+
+
+@keyframes vanishing {
+    0% {
+    transform: scale(1.0);
+    opacity:1;
+    }
+    50% {
+    transform: scale(0.95);
+    opacity:.2;
+    }
+    100% {
+    transform: scale(1);
+    opacity:1;
+    }
+    }
+    

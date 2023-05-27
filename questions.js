@@ -1,4 +1,13 @@
-var pytania_all = [[1543,"heliocentryczna budowa świata, wydanie 'O obrotach sfer niebieskich' (Mikołaj Kopernik - Polska).","Wynalazki"],
+const onboarding= [ ["PL","<h3>Gra chronologiczna</h3>",`<h3>Cel gry:</h3> Celem gry jest dopasowanie i ułożenie w kolejności ich występowania historycznego losowanych 10 kart wydarzeń - 10 kart na dole ekranu.
+        <h3>Mechanika gry:</h3> Ze stosu kart na srodku ekranu, losujesz (poprzez kliknięcie) kartę wydarzenia, którego opis pojawi się na górze stosu kart z pytaniami. Twoim zadaniem jest odgadnięcie roku w którym to wydarzenie miało miejsce i umieszczenie go na planszy poniżej za pomocą zielonych przycisków. Poprawnie umieszczona karta to taka, której data jest większa od daty karty po lewej stroni i jednocześnie mniejsza od daty karty po prawej stronie.
+        <br/>Rozgrywka kończy się po prawidłowym umieszczeniu 10 kart wydarzeń na planszy.
+        <br/><h3>Zrób to wykorzystując jak najmniejsza ilość losowań kart wydarzeń!</h3>`],
+                    ["ENG", "<h3>Chronology game</h3>",`<h3>Objective:</h3> The goal of the game is to place in chronological order 10 randomly drawn event cards - 10 cards at the bottom of the screen.
+        <h3>Game Mechanics:</h3> From the stack of cards in the middle of the screen, you draw (by clicking) an event card, it's description appears at the top of the stack of question/event cards. Your task is to guess the year in which the event took place and place it on the board below using the green buttons. A correctly placed card is one whose date is greater than the card to its left and smaller than the card to its right.
+        <br/>The gameplay ends after correctly placing all 10 event cards on the board.
+        <br/><h3>Achieve this using the fewest possible number of event card draws.</h3>`]]; 
+
+const pytania_all = [[1543,"heliocentryczna budowa świata, wydanie 'O obrotach sfer niebieskich' (Mikołaj Kopernik - Polska).","Wynalazki"],
 [1509,"odkryto najstarszą tapetę ścienną (Christ College w Cambridge - Anglia).","Wynalazki"],
 [1510,"zegarek sprężynowy - najstarszy zachowany egzemplarz (Peter Henlein - Norymberga)","Wynalazki"],
 [1510,"pisuar (Włochy - czas przybliżony)","Wynalazki"],
@@ -1107,10 +1116,10 @@ var pytania_all = [[1543,"heliocentryczna budowa świata, wydanie 'O obrotach sf
 [1897,"powstanie Stronnictwa Narodowo-Demokratycznego","Historia"],
 [1914,"wybuch I wojny światowej","Historia"],
 [1918,"zakończenie I wojny światowej","Historia"],
-[1989,"Upadek Muru Berlińskiego","Historia"]]
+[1989,"Upadek Muru Berlińskiego","Historia"]];
 
 
-var pytania_all_en =[[1543,"heliocentric structure of the world, edition of 'On the Revolutions of the Celestial Spheres' (Mikołaj Copernicus - Poland).","Inventions"],
+const pytania_all_en =[[1543,"heliocentric structure of the world, edition of 'On the Revolutions of the Celestial Spheres' (Mikołaj Copernicus - Poland).","Inventions"],
 [1509,"the oldest wall wallpaper discovered (Christ College in Cambridge - England).","Inventions"],
 [1510,"a spring watch - the oldest surviving example (Peter Henlein - Nuremberg)","Inventions"],
 [1510,"urinal (Italy - approximate time)","Inventions"],
