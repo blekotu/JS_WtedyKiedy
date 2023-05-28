@@ -1,75 +1,62 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<html lang="pl">
-		<title>...</title>
 
-		<link rel="stylesheet" href="style.css">
-        <script src="main.js"></script>
-	
+<head>
+    <meta charset="UTF-8">
+    <html lang="pl">
+    <title>...</title>
 
-	</head>
-	<body>
-        cornify-add;
-		<div class="container">
-            <div class="karty">
-                <div class="karta">
-                    <p> Karta 1</p>
-                </div>
-                <div class="slot"></div>
-                <div class="karta">
-                    <p> Karta 2</p>
-                </div>
-                <div class="slot"></div>
-                <div class="karta">
-                    <p> Karta 3</p>
-                </div>
-                <div class="slot"></div>
-                <div class="karta">
-                    <p> Karta 4</p>
-                </div>
-                <div class="slot"></div>
-                <div class="karta">
-                    <p> Karta 5</p>
-                </div>
-                <div class="slot"></div>
-                <div class="karta"></div>
-                <div class="slot"></div>
-                <div class="karta"></div>
-                <div class="slot"></div>
-                <div class="karta"></div>
-                <div class="slot"></div>
-                <div class="karta"></div>
-                <div class="slot"></div>
-                <div class="karta"></div> 
-                
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="popup"> 
+        <div class="popup-picture">
+            <img src="./img/kotor.png">
+        </div>
+        <div class="popup-text">
+            <div class="popup-text-title">
             </div>
+            <div class="popup-text-body"></div>
+        </div>"
+    </div>
+    <div class="container"></div>
+        <div class="navigator">
+            <div class="score"></div>
+            <div class="current-question"></div>
+            <div class="card-deck"></div>
+        </div>
+        <div class="karty">
+            <div class="slot"></div>
+            <div class="karta"></div>
+            <div class="slot"></div>
+            <div class="karta"></div>
+            <div class="slot"></div>
+            <div class="karta"></div>
+            <div class="slot"></div>
+            <div class="karta"></div>
+            <div class="slot"></div>
+            <div class="karta"> </div>
+            <div class="slot"></div>
+            <div class="karta"></div>
+            <div class="slot"></div>
+            <div class="karta"></div>
+            <div class="slot"></div>
+            <div class="karta"></div>
+            <div class="slot"></div>
+            <div class="karta"></div>
+            <div class="slot"></div>
+            <div class="karta"></div>
+            <div class="slot"></div>
 
-        <script>
+        </div>
+    
+        <script type="text/javascript" src="questions.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+      
 
-            const sloty=document.querySelectorAll('.slot');
-            let tabSloty=[];
-            tabSloty=[...sloty]; 
-            
-
-            function klikniecie(e) {
-                console.dir(tabSloty)
-                let coto=tabSloty.findIndex(element=>element==this)
-                console.log(coto)
-                alert(coto);
-                
-            }
-
-            console.log(sloty);
-            sloty.forEach(karta => karta.addEventListener('click', klikniecie));
-            sloty[2].style.visibility="visible";
-            sloty[3].style.visibility="visible";
-            
-
-        </script>
-
-	</body>
+</body>
 
 
 </html>
