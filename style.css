@@ -1,6 +1,7 @@
 body {
   background-color: rgb(37, 31, 31);
-
+  overflow:hidden   ;
+  max-width: 1400px;
 }
 
 .winner {
@@ -199,7 +200,6 @@ opacity:1;
   margin: 3px;
   color: black;
   background-color: white;
-
   text-align: center;
   text-justify: center;
 }
@@ -211,7 +211,7 @@ opacity:1;
   margin-left: auto;
   margin-right: auto;
   justify-items: flex-end;
-  overflow:scroll;
+  overflow:auto;
   display: flex;
   flex-direction: row;
 }
